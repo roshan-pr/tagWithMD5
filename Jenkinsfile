@@ -10,6 +10,9 @@ pipeline {
     }
     stages {
         stage('Create tag') {
+            when {
+                changeset 'Dockerfile'
+            }
             steps {
                 sh """
                     docker build . -t "dockerimage:${md5sum('Dockerfile')}" -f ./Dockerfile
